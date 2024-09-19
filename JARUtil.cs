@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public static class JARUtil
+public static class UnityUtils
 {
     // --- Maths --- \\
     public static Vector3 GetVector3Between(float min = -1f, float max = 1f)
