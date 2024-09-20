@@ -217,13 +217,13 @@ public static class UnityUtils
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public static string FormatTimeMiliseconds(float time)
+    public static string FormatTimeMilliseconds(float time)
     {
         int minutes = (int)time / 60;
         int seconds = (int)time % 60;
         int miliseconds = (int)(time * 1000) % 1000;
 
-        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, miliseconds);
+        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
     }
 
     // --- Misc --- \\
