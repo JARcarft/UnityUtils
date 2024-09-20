@@ -4,6 +4,8 @@ using System.Linq;
 
 public static class UnityUtils
 {
+    // 20_09_24
+
     // --- Maths --- \\
     public static Vector3 GetVector3Between(float min = -1f, float max = 1f)
     {
@@ -43,9 +45,9 @@ public static class UnityUtils
         return d > epsilon;
     }
 
-    public static float AngleBetweenTwoPositions(Vector2 p0, Vector2 p1)
+    public static float AngleBetweenTwoPositions(Vector2 point1, Vector2 point2)
     {
-        Vector2 dir = (p1 - p0).normalized;
+        Vector2 dir = (point2 - point1).normalized;
         float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
 
         return angle;
@@ -71,12 +73,12 @@ public static class UnityUtils
         return new Vector3(vector.x, vector.y, 0);
     }
 
-    public static Vector3 GetLinearVelocityAtPoint(Rigidbody aRigidbody, Vector3 aLocalPoint)
+    public static Vector3 GetLinearVelocityAtPoint(Rigidbody rb, Vector3 localPoint)
     {
-        var p = aLocalPoint - aRigidbody.centerOfMass;
-        var v = Vector3.Cross(aRigidbody.angularVelocity, p);
-        v = aRigidbody.transform.TransformDirection(v);
-        v += aRigidbody.velocity;
+        var p = localPoint - rb.centerOfMass;
+        var v = Vector3.Cross(rb.angularVelocity, p);
+        v = rb.transform.TransformDirection(v);
+        v += rb.velocity;
         return v;
     }
 
@@ -95,18 +97,18 @@ public static class UnityUtils
         return Mathf.Sqrt(x + y);
     }
 
-    public static Vector2 GetPointOnCircle(Vector2 circleCentre, float radius, float angle)
+    public static Vector2 GetPointOnCircle(Vector2 centre, float radius, float angle)
     {
-        float xPos = radius * Mathf.Cos(angle) + circleCentre.x;
-        float yPos = radius * Mathf.Sin(angle) + circleCentre.y;
+        float xPos = radius * Mathf.Cos(angle) + centre.x;
+        float yPos = radius * Mathf.Sin(angle) + centre.y;
 
         return new Vector2(xPos, yPos);
     }
 
-    public static Vector2 FindClosestPointOnCircle(Vector2 startPos, Vector2 circleCentre, float radius)
+    public static Vector2 FindClosestPointOnCircle(Vector2 point, Vector2 centre, float radius)
     {
-        Vector2 v = startPos - circleCentre;
-        return circleCentre + v / v.Length() * radius;
+        Vector2 v = point - centre;
+        return centre + v / v.Length() * radius;
     }
 
     public static Vector3 FindNearestPointOnLine(Vector3 origin, Vector3 end, Vector3 point)
